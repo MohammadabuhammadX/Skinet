@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace Core.Specifications
 {
@@ -16,6 +11,5 @@ namespace Core.Specifications
         int Take { get; }
         int Skip { get; }
         bool IsPagingEnabled { get; } //if we want to enable paging or not
-
     }
 }

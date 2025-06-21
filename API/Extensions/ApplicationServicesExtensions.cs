@@ -13,6 +13,7 @@ namespace API.Extensions
         {
             // Register repositories
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             // Register AutoMapper

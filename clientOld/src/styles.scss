@@ -1,0 +1,10 @@
+/* src/styles.scss */
+
+/* 1. Load all of Bootstrap’s SCSS via the Sass module system */
+@use "bootstrap/scss/bootstrap" as *;
+
+/* 2. Load ngx‑bootstrap datepicker styles */
+@use "ngx-bootstrap/datepicker/bs-datepicker" as *;
+
+/* 3. Add any of your own global overrides below */
+/* e.g. $primary: #336699; */
