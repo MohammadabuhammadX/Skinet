@@ -4,6 +4,7 @@ using API.Helpers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using API.Errors;
+using Infrastructure.Services;
 
 namespace API.Extensions
 {
@@ -14,6 +15,7 @@ namespace API.Extensions
             // Register repositories
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             // Register AutoMapper
