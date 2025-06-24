@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
 
@@ -16,8 +17,28 @@ namespace API.Extensions
                 {
                     Title = "API v1",
                     Version = "v1",
-                    Description = "API Documentation for the Application"
                 });
+
+                var securitySchema = new OpenApiSecurityScheme
+                {
+                    Description = "Jwt Auth Bearer Scheme",
+                    Name = " Authoriztion",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+                options.AddSecurityDefinition("Bearer", securitySchema);
+                var securityRequierment = new OpenApiSecurityRequirement
+                {
+                    { securitySchema, new [] {"Bearer"}}
+                };
+
+                options.AddSecurityRequirement(securityRequierment);
 
                 // Include XML comments for better API documentation (optional)
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
