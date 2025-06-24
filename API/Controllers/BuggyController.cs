@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/products")]
-    public class BuggyController : ControllerBase
+    public class BuggyController : BaseApiController
     {
         private readonly StoreContext _context;
         public BuggyController(StoreContext context)
