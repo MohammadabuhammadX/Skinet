@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Entities.OrderAggregate;
 
 namespace Infrastructure.Data
 {
@@ -54,6 +55,25 @@ namespace Infrastructure.Data
                         await context.Products.AddRangeAsync(products);
                         await context.SaveChangesAsync();
                     }
+
+                    if (!context.DeliveryMethods.Any())
+                    {
+                        // Turn on IDENTITY_INSERT so we can seed explicit Id values
+                        await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT DeliveryMethods ON");
+
+                        // Read your JSON just like you do for brands and types
+                        var deliveryData = await File.ReadAllTextAsync("../Infrastructure/Data/SeedData/delivery.json");
+                        var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryData);
+
+                        // Add and save
+                        await context.DeliveryMethods.AddRangeAsync(deliveryMethods);
+                        await context.SaveChangesAsync();
+
+                        // Turn it back off
+                        await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT DeliveryMethods OFF");
+                    }
+
+
 
                     await transaction.CommitAsync();
                 }
