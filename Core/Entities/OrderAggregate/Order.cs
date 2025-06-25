@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Entities.OrderAggregate
+﻿namespace Core.Entities.OrderAggregate
 {
     public class Order : BaseEntity
     {
         public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress,
-            DeliveryMethod deliveryMethod, decimal subTotal)
+            DeliveryMethod deliveryMethod, decimal subTotal , string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             //OrderDate = orderDate; // is something that we're setting inside the class as well 
@@ -18,11 +12,11 @@ namespace Core.Entities.OrderAggregate
             OrderItems = orderItems;
             SubTotal = subTotal;
             //Status = status;  // we're already setting inside our class
-            //PaymentIntentId = paymentIntentId;
+            PaymentIntentId = null;
         }
         public Order()
         {
-            
+
         }
         public string BuyerEmail { get; set; } // this is what we're going to use to retrieve the list of orders for a particular user we're not going to relate our order to identities, which is in a separate context boundary 
 
